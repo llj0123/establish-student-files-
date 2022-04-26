@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include <string.h>
+struct Student
+{
+	int stuId;
+	char stuName[20];
+	int stuAge;
+	char stuSEX[100];
+    int stuScore;
+	int stuHeight;
+	struct Student* next;
+};
+
+void printstudent(struct Student* curP)
+{
+	 printf("%d\t%s\t%d\t%s\t%d\t%d\n",
+			curP->stuId,curP->stuName,curP->stuAge,curP->stuSEX,curP->stuScore,curP->stuHeight);
+}
+	
+void printLinkedList(struct Student* headP)
+{
+	while(headP!=NULL)
+	{
+		printstudent(headP);
+		headP=headP->next;
+	}
+}
+
+int main()
+{   
+	struct Student student[200];
+	for(int i=0;i<200;i++)
+	{
+		scanf("%d\t%s\t%d\t%s\t%d\t%d\n",
+			&student[i].stuId,&student[i].stuName,&student[i].stuAge,&student[i].stuSEX,&student[i].stuScore,&student[i].stuHeight);
+	}
+	void printstudent(struct Student student[200]);
+	printstudent(student);
+
+	struct Student student1,student2,student3,student4;
+	printf("student1->student2->student3->student4->NULL\n");
+
+	student1.next=&student2;
+	student2.next=&student3;
+	student3.next=&student4;
+	student4.next=NULL;
+    
+	struct Student* curP=&student1;
+	printLinkedList(curP);
+
+    printf("请输入你想要查询的学生的学号:");
+	int id;
+	scanf("%d",&id);
+	curP=&student1;
+	int flag=0;
+	while(curP!=NULL)
+	{
+		if(curP->stuId==id)
+		{
+			printstudent(curP);
+			flag=1;
+			break;
+		}
+		else
+		{
+			curP=curP->next;
+		}
+	}
+	if(flag==0)
+	{
+		printf("对不起，该学生找不到！\n");
+	}
+
+	printf("接下来要删除student2\n");
+	student1.next=&student3;
+	student2.next=NULL;
+    
+	curP=&student1;
+	printLinkedList(curP);
+    
+	return 0;
+}
+
+void printstudent(struct Student student[200])
+{
+	for(int i=0;i<200;i++)
+	{
+		printf("%d\t%s\t%d\t%s\t%d\t%d\n",
+			student[i].stuId,student[i].stuName,student[i].stuAge,student[i].stuSEX,student[i].stuScore,student[i].stuHeight);
+	}
+}
